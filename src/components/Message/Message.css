@@ -1,0 +1,18 @@
+.chat-message {
+    padding: 1rem;
+    border: 1px solid green;
+    border-radius: 10px;
+    width: 33%;
+    margin-bottom: 10px;
+}
+
+.other-user-message {
+    background-color: rgb(201, 221, 252);
+    text-align: right;
+    margin-left: 63%;
+}
+
+.current-user-message {
+    background-color: rgb(201, 252, 224);
+    margin-right: 63%;
+}

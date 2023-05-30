@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+[![Build status](https://ci.appveyor.com/api/projects/status/eioway3u23gx8676/branch/main?svg=true)](https://ci.appveyor.com/project/marinaustinovich/ra16-homeworks-lifecycle-http-chat-frontend/branch/main)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+deployment: https://marinaustinovich.github.io/ra16-homeworks-lifecycle-http-chat-frontend/
 
-## Available Scripts
+Анонимный чат
+===
 
-In the project directory, you can run:
+Вам необходимо реализовать абсолютно анонимный чат, хотя такого, конечно, не бывает ☺, в который сможет отправлять сообщения любой желающий.
 
-### `npm start`
+Но есть важное требование: если вы даже открыли другую вкладку в браузере, написание всё равно должно идти с вашего аккаунта.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Chat](./public/chat%20.png)
 
-### `npm test`
+## Общая механика
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+При создании компонента создаётся интервал или таймаут и делается периодический опрос сервера в виде http-запроса GET на адрес http://localhost:7070/messages?from={id}, где id — идентификатор последнего полученного сообщения при первоначальной загрузке — 0. Временной интервал предложите сами.
 
-### `npm run build`
+Формат присылаемых данных:
+```json
+[
+    {
+        "id": 1,
+        "userId": "5f2d9da0-f624-4309-a598-8ba35d6c4bb6",
+        "content": "Какая сейчас погода за окном?"
+    },
+    {
+        "id": 2,
+        "userId": "5f2d9da0-f624-4309-a598-8ba35d6c4bb6",
+        "content": "К сожалению, я не знаю ответа на этот вопрос"
+    }
+]
+```
+Где userId — уникальный идентификатор анонимного пользователя. Подумайте, как его сгенерировать и где хранить. Если не придумали — прочитайте спойлеры.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Полученные данные отображаются в виде блоков с возможностью различного выравнивания:
+* ваши — справа;
+* не ваши — слева.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Ваши или не ваши вы определяете путём сравнения своего userId и того, что в сообщении.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Добавление:
+1. Вы заполняете форму и нажимаете кнопку «Добавить».
+1. Выполняется http-запрос POST на адрес http://localhost:7070/messages, в теле запроса передаётся следующий JSON:
+```json
+{
+    "id": 0,
+    "userId": "5f2d9da0-f624-4309-a598-8ba35d6c4bb6",
+    "content": "То, что было введено в поле ввода"
+}
+```
+3. После чего ждёте, пока не произойдёт получение данных по интервалу. Подумайте, как сделать ожидание комфортным для пользователя и как решают эту проблему существующие чаты.
 
-### `npm run eject`
+<details>
+  <summary>Спойлеры</summary>
+  
+  Добиться уникальности анонимов можно, просто записав в local/sessionStorage случайно сгенерированный ID: nanoid, uuid. И использовать его для отправки и получения данных.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+  Подумайте, какие уязвимости в безопасности создаёт подобная схема и возможна ли отправка сообщений от лица другого пользователя.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  Подумайте над тем, как это можно предотвратить.
+</details>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Advanced
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Попробуйте раскрашивать сообщения от разных пользователей в разные цвета.
+1. Попробуйте реализовать авто-скроллинг до последнего сообщения.

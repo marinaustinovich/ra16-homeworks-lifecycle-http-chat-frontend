@@ -1,0 +1,31 @@
+.chat-form {
+    position: relative;
+}
+
+.chat-form input {
+    height: 4rem;
+}
+
+.add-message-button {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    font-size: 2rem;
+    font-weight: 800;
+    color: green;
+    padding: 0;
+    border: 1px solid white;
+    background: white;
+}
+
+.add-message-button:focus {
+    border: none;
+    outline: none;
+    
+}
+
+.add-message-button:hover {
+    border: 1px solid green;
+    border-radius: 25%;
+}
+
