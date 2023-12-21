@@ -1,10 +1,5 @@
-import './App.css';
-import Chat from './components/Chat/Chat';
+import Chat from "./components/Chat/Chat";
 
-function App() {
-    return (
-      <Chat></Chat>
-    );
-}
+const App = () => <Chat></Chat>;
 
 export default App;

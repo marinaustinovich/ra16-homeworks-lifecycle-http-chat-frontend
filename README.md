@@ -1,5 +1,3 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/eioway3u23gx8676/branch/main?svg=true)](https://ci.appveyor.com/project/marinaustinovich/ra16-homeworks-lifecycle-http-chat-frontend/branch/main)
-
 deployment: https://marinaustinovich.github.io/ra16-homeworks-lifecycle-http-chat-frontend/
 
 Анонимный чат
