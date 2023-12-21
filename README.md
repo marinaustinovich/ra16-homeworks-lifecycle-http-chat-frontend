@@ -1,4 +1,4 @@
-deployment: https://marinaustinovich.github.io/ra16-homeworks-lifecycle-http-chat-frontend/
+deployment: https://chat-front-zmfm.onrender.com/
 
 Анонимный чат
 ===
